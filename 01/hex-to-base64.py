@@ -1,5 +1,5 @@
+# https://cryptopals.com/sets/1/challenges/1
 # thanks to https://www.devdungeon.com/content/working-binary-data-python
-from __future__ import print_function
 import sys
 import binascii
 hex_bytes_text = sys.argv[1]
