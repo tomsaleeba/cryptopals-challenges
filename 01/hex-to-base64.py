@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # https://cryptopals.com/sets/1/challenges/1
 # thanks to https://www.devdungeon.com/content/working-binary-data-python
 import sys

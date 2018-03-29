@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # https://cryptopals.com/sets/1/challenges/2
 import sys
 import binascii
@@ -13,4 +14,4 @@ for i in range(0, byte_length):
   xor_result = src1_curr ^ src2_curr
   out_bytes[i] = xor_result
 result = binascii.hexlify(out_bytes)
-print(result)
+sys.stdout.buffer.write(result)
