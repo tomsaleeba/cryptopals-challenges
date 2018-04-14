@@ -19,9 +19,8 @@ def process_line(line):
             src_curr = enc_msg_bytes[i]
             xor_result = src_curr ^ cypher_char
             out_bytes[i] = xor_result
-        total_length = len(out_bytes)
-        without_alphabet = out_bytes.translate(None, b'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz')
-        letters_count = total_length - len(without_alphabet)
+        without_alphabet = out_bytes.translate(None, b' ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz')
+        letters_count = byte_length - len(without_alphabet)
         return {
             'score': letters_count,
             'msg': out_bytes,
@@ -33,7 +32,7 @@ def process_line(line):
         'score': 0,
         'records': []
     }
-    possible_keys = list(range(ord('A'), ord('z') + 1))
+    possible_keys = list(range(0, 256))
     src_hex_bytes_text = line.strip()
     src_parsed_bytes = binascii.unhexlify(src_hex_bytes_text)
     logger.debug('Parsed bytes (len=%d): %s' % (len(src_parsed_bytes), src_parsed_bytes))
@@ -63,9 +62,9 @@ logger.info('Qualifying decoded lines: %d' % len(global_bests))
 def getkey(rec):
     return rec['score']
 global_bests.sort(key=getkey)
-records_to_display=5
+records_to_display=1
 for curr in global_bests[-1 * records_to_display:]:
-    print('score: %d using key "%s" for result "%s" with input "%s"' % (
+    print('score: %d using key "%s" for result \n    %s\n  with input\n    %s' % (
             curr['score'],
             chr(curr['cypher_key']),
             curr['msg'],
